@@ -19,7 +19,7 @@ const projects: Project[] = [
     subtitle: 'ATS Resume LLM App',
     description:
       'Advanced resume optimization using OpenAI APIs with intelligent keyword analysis and formatting suggestions. Achieves significant improvement in ATS match rates through AI-powered content enhancement.',
-    image: '/project-resume.jpg',
+    image: 'project-resume.jpg',
     techStack: ['OpenAI APIs', 'Python', 'AWS', 'Google Gemini Pro'],
     metric: '50% improvement in ATS match rates',
     githubUrl: 'https://github.com/MayurJadhav-1998',
@@ -30,7 +30,7 @@ const projects: Project[] = [
     subtitle: 'Multi-Agent Support System',
     description:
       'Multi-agent LLM architecture for intelligent customer support with DAG-structured workflows, authentication, context retrieval, and audio transcription capabilities.',
-    image: '/project-customer-service.jpg',
+    image: 'project-customer-service.jpg',
     techStack: ['LangChain', 'RAG', 'OpenAI Whisper', 'Streamlit'],
     features: ['Multi-agent Architecture', 'Audio Transcription'],
     githubUrl: 'https://github.com/MayurJadhav-1998',

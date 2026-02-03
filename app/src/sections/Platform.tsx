@@ -112,7 +112,7 @@ export default function Platform() {
             style={{ border: '1px solid var(--border-color)' }}
           >
             <img
-              src="/platform-visual.jpg"
+              src="platform-visual.jpg"
               alt="Schema-Agnostic AI Platform"
               className="w-full aspect-video object-cover transition-transform duration-700 group-hover:scale-105"
             />

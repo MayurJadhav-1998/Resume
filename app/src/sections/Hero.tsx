@@ -223,7 +223,7 @@ export default function Hero() {
                 style={{ borderColor: 'var(--border-color)' }}
               >
                 <img
-                  src="/hero-visual.jpg"
+                  src="hero-visual.jpg"
                   alt="AI Knowledge Graph Visualization"
                   className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
                 />
