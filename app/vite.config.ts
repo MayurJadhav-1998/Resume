@@ -10,6 +10,7 @@ const __dirname = path.dirname(__filename);
 
 export default defineConfig({
   // Use '/Resume/' if your repo name is Resume
+  root: 'app',
   base: '/Resume/', 
   plugins: [inspectAttr(), react()],
   resolve: {
