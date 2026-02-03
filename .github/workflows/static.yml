@@ -2,7 +2,7 @@ name: Deploy static content to Pages
 
 on:
   push:
-    branches: ["master"] # Ensure this matches your default branch name
+    branches: ["master"]
   workflow_dispatch:
 
 permissions:
@@ -20,6 +20,12 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+    
+    # This line tells GitHub to run all commands inside the 'app' folder
+    defaults:
+      run:
+        working-directory: ./app
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -29,6 +35,8 @@ jobs:
         with:
           node-version: 20
           cache: 'npm'
+          # This tells the cache where to find your lock file
+          cache-dependency-path: './app/package-lock.json'
 
       - name: Install dependencies
         run: npm install
@@ -42,8 +50,8 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Vite builds into the dist folder
-          path: './dist'
+          # Point this to the dist folder inside app
+          path: './app/dist'
 
       - name: Deploy to GitHub Pages
         id: deployment
