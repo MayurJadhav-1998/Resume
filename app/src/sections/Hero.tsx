@@ -147,8 +147,8 @@ export default function Hero() {
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </button>
               <a
-                href="/resume.pdf"
-                download
+                href="/Resume/Mayur_Jadhav_Gen_AI_2026.pdf"
+                download="Mayur_Jadhav_Gen_AI_2026.pdf"
                 className="group inline-flex items-center gap-2 px-6 py-3 rounded-full font-medium transition-all duration-300 border"
                 style={{ 
                   backgroundColor: 'transparent',
