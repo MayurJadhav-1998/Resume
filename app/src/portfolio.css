@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;400;600;800&family=Fraunces:ital,opsz,wght@0,9..144,300..500;1,9..144,300..500&family=Caveat:wght@500&family=JetBrains+Mono:wght@400;500&display=swap');
+
+.pf {
+  --ink: #0a0a0b;
+  --panel: #111113;
+  --line: #26262a;
+  --bone: #efece4;
+  --mute: #8a8a90;
+  --volt: #d4ff3a;
+  background: var(--ink);
+  color: var(--bone);
+  font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+.pf * { box-sizing: border-box; }
+.pf ::selection { background: var(--volt); color: var(--ink); }
+.pf .mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+.pf .serif { font-family: 'Fraunces', Georgia, serif; font-weight: 350; font-variation-settings: 'opsz' 144; letter-spacing: -0.02em; }
+.pf .hand { font-family: 'Caveat', cursive; font-weight: 500; }
+.pf .display { font-variation-settings: 'opsz' 96; letter-spacing: -0.045em; line-height: 0.92; }
+.pf a { color: inherit; text-decoration: none; }
+.pf :focus-visible { outline: 2px solid var(--volt); outline-offset: 3px; border-radius: 4px; }
+
+/* blueprint grid behind the hero */
+.pf::before {
+  content: '';
+  position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  background-image:
+    linear-gradient(to right, rgba(255,255,255,.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,.035) 1px, transparent 1px);
+  background-size: 80px 80px;
+  mask-image: radial-gradient(ellipse at 50% 20%, #000 20%, transparent 75%);
+}
+.pf > * { position: relative; z-index: 1; }
+
+.pf .rise { opacity: 0; transform: translateY(28px); transition: opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1); }
+.pf .rise.in { opacity: 1; transform: none; }
+
+@keyframes pf-blink { 50% { opacity: 0; } }
+.pf .caret { display: inline-block; width: .55em; height: 1em; background: var(--volt); vertical-align: -.12em; animation: pf-blink 1s steps(1) infinite; }
+
+@keyframes pf-pulse { 0% { box-shadow: 0 0 0 0 rgba(212,255,58,.6); } 100% { box-shadow: 0 0 0 10px rgba(212,255,58,0); } }
+.pf .live { width: 8px; height: 8px; border-radius: 50%; background: var(--volt); animation: pf-pulse 1.6s infinite; }
+
+.pf .btn-volt { background: var(--volt); color: var(--ink); transition: transform .2s, box-shadow .2s; }
+.pf .btn-volt:hover { transform: translate(-3px,-3px); box-shadow: 5px 5px 0 var(--bone); }
+
+/* story paragraph: words light up as you read down the page */
+.pf .sw { color: #3b3b40; transition: color .35s ease; }
+.pf .sw.lit { color: var(--bone); }
+.pf .sw.num { font-style: italic; }
+.pf .sw.num.lit { color: var(--volt); }
+html { scroll-behavior: smooth; }
+section[id] { scroll-margin-top: 4rem; }
+
+/* toolbox detail swaps in when the layer changes */
+@keyframes pf-swap { from { opacity: 0; transform: translateY(10px); } }
+.pf .swap { animation: pf-swap .45s cubic-bezier(.2,.7,.2,1); }
+
+/* career accordion */
+.pf .panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .55s cubic-bezier(.2,.7,.2,1); }
+.pf .panel.open { grid-template-rows: 1fr; }
+.pf .panel > div { overflow: hidden; }
+.pf .org { transition: transform .45s cubic-bezier(.2,.7,.2,1), color .3s; transform-origin: left; }
+.pf .job:hover .org, .pf .job.open .org { transform: translateX(10px); }
+.pf .job .plus { transition: transform .45s cubic-bezier(.2,.7,.2,1); }
+.pf .job.open .plus { transform: rotate(45deg); }
+.pf .job.open .org { color: var(--volt); }
+
+/* phone number: underline draws in on hover */
+.pf .callme { background: linear-gradient(var(--volt), var(--volt)) no-repeat 0 100% / 0% 0.07em; transition: background-size .5s cubic-bezier(.2,.7,.2,1), color .3s; }
+.pf .callme:hover, .pf .callme:focus-visible { background-size: 100% 0.07em; color: var(--volt); }
+.pf .quiet { transition: color .2s; }
+.pf .quiet:hover { color: var(--volt); }
+
+@media (prefers-reduced-motion: reduce) {
+  .pf .caret, .pf .live, .pf .swap { animation: none; }
+  .pf .rise, .pf .panel, .pf .org, .pf .sw { transition: none; }
+  .pf .rise { opacity: 1; transform: none; }
+  html { scroll-behavior: auto; }
+}
