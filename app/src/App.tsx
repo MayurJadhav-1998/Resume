@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import './portfolio.css';
 
-const EMAIL = 'mayurjadhav1998@gmail.com';
+const EMAIL = 'mayurjadhavsm@gmail.com';
 const PHONE = '+1 (682) 374-5375';
 const TEL = `tel:${PHONE.replace(/[^+\d]/g, '')}`;
 const BASE = import.meta.env.BASE_URL;
@@ -31,13 +31,23 @@ function Reveal({ children, delay = 0, className = '' }: { children: ReactNode; 
   );
 }
 
-function Label({ n, children }: { n: string; children: ReactNode }) {
+function Eyebrow({ children }: { children: ReactNode }) {
+  return <div className="mono text-[12px] uppercase tracking-[0.18em] text-[var(--mute)]">{children}</div>;
+}
+
+function GitHubIcon({ size = 28 }: { size?: number }) {
   return (
-    <div className="mono flex items-center gap-3 text-[12px] uppercase tracking-[0.18em] text-[var(--mute)]">
-      <span className="text-[var(--volt)]">{n}</span>
-      <span className="h-px w-10 bg-[var(--line)]" />
-      {children}
-    </div>
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+      <path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.42-2.69 5.39-5.25 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z" />
+    </svg>
+  );
+}
+
+function LinkedInIcon({ size = 28 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+      <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z" />
+    </svg>
   );
 }
 
@@ -79,17 +89,21 @@ function AgentTrace() {
 }
 
 function Nav() {
-  const links = [['Impact', '#impact'], ['Work', '#work'], ['Career', '#career'], ['Stack', '#stack'], ['Contact', '#contact']];
+  const links = [['Story', '#story'], ['Work', '#work'], ['Career', '#career'], ['Toolbox', '#toolbox'], ['Contact', '#contact']];
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-[var(--line)] bg-[var(--ink)]/80 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-[1280px] items-center justify-between px-6">
         <a href="#top" className="mono text-sm font-medium tracking-tight">mayur<span className="text-[var(--volt)]">.</span>jadhav</a>
         <nav className="mono hidden items-center gap-8 text-[12px] uppercase tracking-widest text-[var(--mute)] md:flex">
           {links.map(([l, h]) => (
-            <a key={h} href={h} className="transition-colors hover:text-[var(--volt)]">{l}</a>
+            <a key={h} href={h} className="quiet">{l}</a>
           ))}
         </nav>
-        <a href={TEL} className="btn-volt mono rounded-full px-4 py-2 text-[12px] font-medium uppercase tracking-wider">Call me</a>
+        <div className="flex items-center gap-4">
+          <a href={GITHUB} target="_blank" rel="noreferrer" aria-label="GitHub" className="quiet hidden text-[var(--mute)] sm:block"><GitHubIcon size={20} /></a>
+          <a href={LINKEDIN} target="_blank" rel="noreferrer" aria-label="LinkedIn" className="quiet hidden text-[var(--mute)] sm:block"><LinkedInIcon size={20} /></a>
+          <a href={TEL} className="btn-volt mono rounded-full px-4 py-2 text-[12px] font-medium uppercase tracking-wider">Call me</a>
+        </div>
       </div>
     </header>
   );
@@ -114,11 +128,15 @@ function Hero() {
           </h1>
           <p className="mt-10 max-w-xl text-lg leading-relaxed text-[#b9b6ad]">
             Gen AI engineer building agentic platforms, RAG systems and knowledge graphs for enterprises:
-            from schema-agnostic data layers at AT&amp;T to LLM apps that cut task time by 60%.
+            from secure, MCP-connected agents at AT&amp;T to a hybrid RAG platform that cut query latency by 23% at Infosys.
           </p>
           <div className="mt-10 flex flex-wrap gap-4">
-            <a href={`mailto:${EMAIL}`} className="btn-volt rounded-full px-7 py-4 text-[15px] font-semibold">Let’s talk →</a>
+            <a href="#contact" className="btn-volt inline-block rounded-full px-7 py-4 text-[15px] font-semibold">Let’s talk →</a>
             <a href={RESUME} target="_blank" rel="noreferrer" className="rounded-full border border-[var(--line)] px-7 py-4 text-[15px] font-semibold transition-colors hover:border-[var(--bone)]">Résumé (PDF)</a>
+          </div>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <a href={GITHUB} target="_blank" rel="noreferrer" className="mono inline-flex items-center gap-2.5 rounded-full border border-[var(--line)] px-4 py-2.5 text-[12px] uppercase tracking-widest transition-colors hover:border-[var(--volt)] hover:text-[var(--volt)]"><GitHubIcon size={16} />GitHub</a>
+            <a href={LINKEDIN} target="_blank" rel="noreferrer" className="mono inline-flex items-center gap-2.5 rounded-full border border-[var(--line)] px-4 py-2.5 text-[12px] uppercase tracking-widest transition-colors hover:border-[var(--volt)] hover:text-[var(--volt)]"><LinkedInIcon size={16} />LinkedIn</a>
           </div>
         </div>
         <Reveal delay={150}><AgentTrace /></Reveal>
@@ -127,41 +145,64 @@ function Hero() {
   );
 }
 
-const STACK = ['LangGraph', 'LangChain', 'Deep Agents', 'RAG', 'Knowledge Graphs', 'AWS Bedrock', 'Neo4j', 'Pinecone', 'ChromaDB', 'FastAPI', 'Kubernetes', 'Terraform', 'Fine-tuning', 'Vector Embeddings'];
-
-function Marquee() {
-  const items = [...STACK, ...STACK];
-  return (
-    <div className="overflow-hidden border-y border-[var(--line)] py-5" aria-hidden>
-      <div className="marquee mono gap-12 text-[13px] uppercase tracking-[0.2em] text-[var(--mute)]">
-        {items.map((s, i) => (
-          <span key={i} className="flex items-center gap-12">{s}<span className="text-[var(--volt)]">✦</span></span>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-const IMPACT = [
-  { v: '60%', l: 'faster task completion with LLMs in enterprise apps', s: 'Infosys' },
-  { v: '150%', l: 'ETL throughput gain after pipeline optimization', s: 'Xoriant' },
-  { v: '25%', l: 'accuracy lift from RAG + advanced prompting', s: 'Infosys' },
-  { v: '1 / 250', l: 'teams: first place at Datathon 2023', s: 'UT Arlington' },
+/* ---------- Story: the numbers, told as sentences ---------- */
+// [text, isNumber]; numbers are the figures worth remembering
+const STORY: [string, boolean][] = [
+  ['At AT&T I build agents that learn how people query: analytics productivity', false],
+  ['up 42%,', true],
+  ['query accuracy', false],
+  ['up 28%,', true],
+  ['plus a browser agent that cut manual data collection by', false],
+  ['40%.', true],
+  ['At Infosys, a hybrid RAG platform across GCP and Azure answered queries', false],
+  ['23% faster,', true],
+  ['and few-shot prompting with re-ranking lifted search relevance', false],
+  ['28%.', true],
+  ['Before that I led an internal portal at Xoriant on Angular, Spring Boot and AWS. In 2023 my team took', false],
+  ['first place out of 250', true],
+  ['at Datathon.', false],
 ];
 
-function Impact() {
+const STORY_WORDS = STORY.flatMap(([text, num]) =>
+  text.split(' ').filter(Boolean).map((w) => ({ w, num })),
+);
+
+function Story() {
+  const ref = useRef<HTMLParagraphElement>(null);
+  const [lit, setLit] = useState(0);
+
+  useEffect(() => {
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) {
+      setLit(STORY_WORDS.length);
+      return;
+    }
+    const update = () => {
+      const el = ref.current;
+      if (!el) return;
+      const r = el.getBoundingClientRect();
+      const vh = window.innerHeight;
+      // starts as the paragraph enters the lower third, finishes as its end reaches mid-screen
+      const p = (vh * 0.8 - r.top) / (r.height + vh * 0.8 - vh * 0.45);
+      setLit(Math.round(Math.min(1, Math.max(0, p)) * STORY_WORDS.length));
+    };
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    return () => {
+      window.removeEventListener('scroll', update);
+      window.removeEventListener('resize', update);
+    };
+  }, []);
+
   return (
-    <section id="impact" className="mx-auto max-w-[1280px] px-6 py-28">
-      <Reveal><Label n="01">Receipts, not adjectives</Label></Reveal>
-      <div className="mt-10 grid border-l border-t border-[var(--line)] sm:grid-cols-2 lg:grid-cols-4">
-        {IMPACT.map((m, i) => (
-          <Reveal key={m.v} delay={i * 90} className="row border-b border-r border-[var(--line)] p-7 pb-10">
-            <div className="display text-[clamp(2.8rem,5vw,4.6rem)] font-extrabold text-[var(--volt)]">{m.v}</div>
-            <p className="mt-5 text-[15px] leading-snug text-[#cfccc3]">{m.l}</p>
-            <div className="mono mt-6 text-[11px] uppercase tracking-widest text-[var(--mute)]">{m.s}</div>
-          </Reveal>
+    <section id="story" className="mx-auto max-w-[1100px] px-6 py-32">
+      <Eyebrow>The short version</Eyebrow>
+      <p ref={ref} className="serif mt-8 text-[clamp(1.7rem,3.5vw,3.1rem)] leading-[1.22]">
+        {STORY_WORDS.map(({ w, num }, i) => (
+          <span key={i} className={`sw ${num ? 'num' : ''} ${i < lit ? 'lit' : ''}`}>{w}{' '}</span>
         ))}
-      </div>
+      </p>
     </section>
   );
 }
@@ -171,7 +212,7 @@ const WORK = [
     title: 'Shopify Customer Service AI',
     tag: 'Multi-agent support system',
     img: 'project-customer-service.jpg',
-    body: 'A DAG-structured multi-agent LLM architecture that authenticates users, retrieves context and handles voice via Whisper transcription.',
+    body: 'Multi-agent LLM architecture for intelligent customer support with DAG-structured workflows, authentication, context retrieval, and audio transcription capabilities.',
     stack: ['LangChain', 'RAG', 'OpenAI Whisper', 'Streamlit'],
   },
   {
@@ -186,7 +227,7 @@ const WORK = [
 function Work() {
   return (
     <section id="work" className="mx-auto max-w-[1280px] px-6 py-20">
-      <Reveal><Label n="02">Selected work</Label></Reveal>
+      <Reveal><Eyebrow>Selected work</Eyebrow></Reveal>
       <Reveal>
         <h2 className="display mt-8 max-w-3xl text-[clamp(2.4rem,5.5vw,5rem)] font-extrabold">Things I built, end to end.</h2>
       </Reveal>
@@ -219,123 +260,273 @@ function Work() {
   );
 }
 
+/* ---------- Career: one open at a time ---------- */
 const CAREER = [
   {
-    role: 'Gen AI Engineer', org: 'AT&T', when: '2025 — Now', where: 'Dallas, TX', now: true,
-    pts: ['Architecting a schema-agnostic AI platform that connects diverse data sources', 'Building knowledge graphs with automated schema discovery and mapping', 'Shipping Deep Agents and executor bundles for unified queries across heterogeneous databases'],
+    role: 'Gen AI Engineer', org: 'AT&T', when: 'Sep 2025 – now', where: 'Dallas, TX',
+    pts: ['Secured Model Context Protocol integration with LangGraph: authentication, rate limiting and encrypted channels, 100% compliant with enterprise security standards across 15+ tools', 'Deep Agents with autonomous decision-making and adaptive pipelines: +42% analytics productivity, +28% query accuracy', 'Playwright browser agent for form filling, scraping and report downloads: 40% less manual data collection'],
   },
   {
-    role: 'Senior Analyst, Data Science', org: 'Infosys', when: '2024 — 2025', where: 'Richardson, TX', now: false,
-    pts: ['LLM integration into enterprise apps: 60% faster task completion', 'RAG with advanced prompting: +25% accuracy', 'AWS Bedrock infrastructure with auto-scaling and CI/CD'],
+    role: 'Gen AI Engineer', org: 'Infosys', when: 'Jun 2024 – Sep 2025', where: 'Richardson, TX',
+    pts: ['Hybrid RAG platform on GCP BigQuery and Azure AI Search: 23% lower query latency', 'Dynamic few-shot prompting with HyDE, MMR and LLM re-ranking: +12% insight accuracy, +28% search relevance', 'AI agents for report generation and data analysis: 15% less processing time'],
   },
   {
-    role: 'Graduate Research & Teaching Assistant', org: 'UT Arlington', when: '2023 — 2024', where: 'Texas', now: false,
-    pts: ['LLMs in university enterprise systems: +35% productivity', 'Fine-tuning and RAG across legal, financial and technical domains'],
+    role: 'Software Developer', org: 'Xoriant', when: 'Nov 2020 – Jul 2022', where: 'Remote',
+    pts: ['Led an internal portal for ACCORD Group on Angular, Spring Boot, AWS, MySQL and REST APIs', 'Ran on AWS EC2, EMR, DynamoDB and S3 for scalable, highly available deployments'],
   },
   {
-    role: 'Software Engineer', org: 'Xoriant', when: '2020 — 2022', where: 'California', now: false,
-    pts: ['Angular + Spring Boot + AWS portal: 40% shorter wait times', 'Talend ETL optimization: 150% higher throughput'],
+    role: 'Web Developer', org: 'Webster Solutions', when: 'Jan 2020 – Aug 2020', where: 'Maharashtra, IN',
+    pts: ['Built websites for clients, managing code with Git'],
   },
 ];
 
 function Career() {
+  const [open, setOpen] = useState(0);
   return (
     <section id="career" className="mx-auto max-w-[1280px] px-6 py-28">
-      <Reveal><Label n="03">Career log</Label></Reveal>
-      <div className="mt-10 border-t border-[var(--line)]">
-        {CAREER.map((c, i) => (
-          <Reveal key={c.org} delay={i * 70}>
-            <div className="row grid gap-6 border-b border-[var(--line)] px-2 py-10 md:grid-cols-[200px_1fr_1.3fr]">
-              <div className="mono text-[13px] text-[var(--mute)]">
-                <div className={c.now ? 'text-[var(--volt)]' : ''}>{c.when}</div>
-                <div className="mt-1">{c.where}</div>
+      <Reveal>
+        <Eyebrow>Where I’ve worked</Eyebrow>
+        <h2 className="display mt-8 max-w-3xl text-[clamp(2.4rem,5.5vw,5rem)] font-extrabold">Four jobs, one thread: make data answer back.</h2>
+      </Reveal>
+      <div className="mt-14 border-t border-[var(--line)]">
+        {CAREER.map((c, i) => {
+          const isOpen = open === i;
+          return (
+            <div key={c.org} className={`job border-b border-[var(--line)] ${isOpen ? 'open' : ''}`}>
+              <button
+                type="button"
+                aria-expanded={isOpen}
+                aria-controls={`job-${i}`}
+                onClick={() => setOpen(isOpen ? -1 : i)}
+                className="flex w-full items-center justify-between gap-6 py-7 text-left"
+              >
+                <span className="flex flex-wrap items-baseline gap-x-5 gap-y-1">
+                  <span className="org display text-[clamp(2.2rem,6vw,5.2rem)] font-extrabold">{c.org}</span>
+                  {i === 0 && <span className="hand -rotate-3 text-2xl text-[var(--volt)]">← where I am now</span>}
+                </span>
+                <span className="mono hidden shrink-0 text-right text-[12px] leading-relaxed text-[var(--mute)] sm:block">
+                  {c.role}<br />{c.when}
+                </span>
+                <span className="plus mono text-3xl text-[var(--mute)]" aria-hidden>+</span>
+              </button>
+              <div id={`job-${i}`} role="region" className={`panel ${isOpen ? 'open' : ''}`}>
+                <div>
+                  <div className="grid gap-6 pb-10 md:grid-cols-[1fr_1.4fr]">
+                    <div className="mono text-[12px] leading-relaxed text-[var(--mute)] sm:hidden">{c.role} · {c.when}</div>
+                    <div className="mono hidden text-[12px] text-[var(--mute)] md:block">{c.where}</div>
+                    <ul className="space-y-3 text-[17px] leading-snug text-[#cfccc3]">
+                      {c.pts.map((p) => (
+                        <li key={p} className="flex gap-3"><span className="mt-[9px] h-px w-4 shrink-0 bg-[var(--volt)]" />{p}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
               </div>
-              <div>
-                <h3 className="display text-4xl font-extrabold md:text-5xl">{c.org}</h3>
-                <div className="mt-3 text-[#b9b6ad]">{c.role}</div>
-              </div>
-              <ul className="space-y-3 text-[15px] leading-snug text-[#cfccc3]">
-                {c.pts.map((p) => (
-                  <li key={p} className="flex gap-3"><span className="mt-[7px] h-1.5 w-1.5 shrink-0 bg-[var(--volt)]" />{p}</li>
-                ))}
-              </ul>
             </div>
-          </Reveal>
-        ))}
+          );
+        })}
       </div>
     </section>
   );
 }
 
-const GROUPS = [
-  ['AI / ML', 'LangGraph · LangChain · LLMs · RAG · Fine-tuning · Embeddings · NLP · Transformers · Deep Agents'],
-  ['Cloud', 'AWS Bedrock · Azure · GCP · Docker · Kubernetes · Terraform · CI/CD'],
-  ['Data', 'Python · SQL · Neo4j · Pinecone · ChromaDB · Knowledge Graphs · ETL'],
-  ['Build', 'FastAPI · Streamlit · Angular · Spring Boot · Git · Agile'],
-];
-const CREDS = [
-  ['M.S. Information Systems', 'UT Arlington · GPA 3.89'],
-  ['B.E. Computer Science', 'University of Pune · GPA 3.60'],
-  ['Infosys Certified Applied GenAI Professional', '2025'],
-  ['AI Agents in LangGraph', 'Certification · 2024'],
-  ['First place, Datathon 2023', '250 teams'],
+/* ---------- Toolbox: the stack as the path a request takes ---------- */
+interface Layer {
+  name: string;
+  line: string;
+  tools: string[];
+  proof: { where: string; text: ReactNode }[];
+}
+
+const LAYERS: Layer[] = [
+  {
+    name: 'Orchestrate',
+    line: 'Decide what happens next, safely.',
+    tools: ['LangGraph', 'LangChain', 'Deep Agents', 'Model Context Protocol'],
+    proof: [
+      { where: 'AT&T', text: <>Secured MCP server connections for LangGraph workflows with authentication, rate limiting and encrypted channels: <em>100%</em> compliance with enterprise security standards across <em>15+</em> external tools and services.</> },
+    ],
+  },
+  {
+    name: 'Act',
+    line: 'Let agents do the work, not just talk about it.',
+    tools: ['Deep Agents', 'Playwright', 'Browser Use agent', 'Adaptive pipelines'],
+    proof: [
+      { where: 'AT&T', text: <>Deep Agents that learn from how people query: <em>+42%</em> cross-functional analytics productivity and <em>+28%</em> query accuracy on domain-specific requests.</> },
+      { where: 'AT&T', text: <>A Playwright browser agent on LangGraph that fills forms, scrapes and downloads reports, cutting manual data collection by <em>40%</em>.</> },
+      { where: 'Infosys', text: <>Report-generation agents that cut processing time by <em>15%</em>.</> },
+    ],
+  },
+  {
+    name: 'Retrieve',
+    line: 'Find the right context before the model speaks.',
+    tools: ['Hybrid RAG', 'HyDE', 'MMR', 'LLM re-ranking', 'Dynamic few-shot', 'Azure AI Search', 'Knowledge graphs', 'Neo4j', 'Pinecone', 'ChromaDB'],
+    proof: [
+      { where: 'Infosys', text: <>A hybrid RAG platform across GCP and Azure, using BigQuery and Azure AI Search: <em>23%</em> lower query latency.</> },
+      { where: 'Infosys', text: <>Dynamic few-shot prompting with HyDE, MMR and LLM re-ranking: <em>+12%</em> accuracy in generated insights and <em>+28%</em> search relevance.</> },
+    ],
+  },
+  {
+    name: 'Run',
+    line: 'Keep it up, keep it affordable.',
+    tools: ['GCP', 'BigQuery', 'Azure', 'AWS', 'Docker', 'Kubernetes', 'Terraform', 'CI/CD', 'Python', 'FastAPI', 'Streamlit'],
+    proof: [
+      { where: 'Infosys → Xoriant', text: <>Multi-cloud in practice: GCP and Azure for the RAG platform, and AWS (EC2, EMR, DynamoDB, S3) for high-availability application deployment.</> },
+    ],
+  },
+  {
+    name: 'Build',
+    line: 'Where I started, and why the boring parts matter.',
+    tools: ['Angular', 'Spring Boot', 'REST APIs', 'MySQL', 'AWS', 'Git'],
+    proof: [
+      { where: 'Xoriant', text: <>Led an internal portal for ACCORD Group, from Angular front end to Spring Boot services and MySQL, handling client and policy management with secure, cloud-based data.</> },
+    ],
+  },
 ];
 
-function Stack() {
+const SCHOOL: [string, string][] = [
+  ['M.S. Information Systems, UT Arlington', '3.89 GPA · 2024'],
+  ['B.E. Computer Science, University of Pune', '3.60 GPA · 2020'],
+  ['Infosys Certified Applied Generative AI Professional', 'May 2025'],
+  ['AI Agents in LangGraph', 'Jul 2024'],
+  ['First place, Datathon 2023', '250 teams'],
+  ['Star Employee Award, from the client', 'Oct 2022'],
+];
+
+function Toolbox() {
+  const [active, setActive] = useState(0);
+  const layer = LAYERS[active];
   return (
-    <section id="stack" className="mx-auto grid max-w-[1280px] gap-16 px-6 py-20 lg:grid-cols-2">
-      <div>
-        <Reveal><Label n="04">Toolbox</Label></Reveal>
-        <div className="mt-10 space-y-8">
-          {GROUPS.map(([g, items], i) => (
-            <Reveal key={g} delay={i * 80}>
-              <div className="mono text-[11px] uppercase tracking-widest text-[var(--volt)]">{g}</div>
-              <p className="mt-2 text-lg leading-relaxed text-[#cfccc3]">{items}</p>
-            </Reveal>
-          ))}
-        </div>
-      </div>
-      <div>
-        <Reveal><Label n="05">Credentials</Label></Reveal>
-        <div className="mt-10 border-t border-[var(--line)]">
-          {CREDS.map(([a, b], i) => (
-            <Reveal key={a} delay={i * 60}>
-              <div className="row flex items-baseline justify-between gap-6 border-b border-[var(--line)] px-2 py-5">
-                <span className="text-lg font-semibold">{a}</span>
-                <span className="mono shrink-0 text-[12px] text-[var(--mute)]">{b}</span>
+    <section id="toolbox" className="mx-auto max-w-[1280px] px-6 py-28">
+      <Reveal>
+        <Eyebrow>Toolbox</Eyebrow>
+        <h2 className="display mt-8 max-w-3xl text-[clamp(2.4rem,5.5vw,5rem)] font-extrabold">Follow a request through my stack.</h2>
+        <p className="mt-6 max-w-xl text-lg leading-relaxed text-[#b9b6ad]">
+          Every layer below is something I’ve shipped, with the result that came out of it. Pick one.
+        </p>
+      </Reveal>
+
+      <div className="mt-14 grid gap-10 lg:grid-cols-[0.8fr_1.3fr]">
+        <Reveal>
+          <ol className="relative" role="tablist" aria-label="Stack layers">
+            <span className="absolute bottom-6 left-[7px] top-6 w-px bg-[var(--line)]" aria-hidden />
+            {LAYERS.map((l, i) => {
+              const on = i === active;
+              return (
+                <li key={l.name} role="presentation">
+                  <button
+                    type="button"
+                    role="tab"
+                    aria-selected={on}
+                    aria-controls="layer-panel"
+                    onClick={() => setActive(i)}
+                    onMouseEnter={() => setActive(i)}
+                    onFocus={() => setActive(i)}
+                    className="group relative flex w-full items-start gap-6 py-4 text-left"
+                  >
+                    <span className={`relative z-10 mt-[14px] h-[15px] w-[15px] shrink-0 rounded-full border transition-all duration-300 ${on ? 'scale-125 border-[var(--volt)] bg-[var(--volt)]' : 'border-[var(--mute)] bg-[var(--ink)] group-hover:border-[var(--bone)]'}`} />
+                    <span>
+                      <span className={`display block text-[clamp(1.9rem,3.4vw,3rem)] font-extrabold transition-colors duration-300 ${on ? 'text-[var(--volt)]' : 'text-[#55555b] group-hover:text-[var(--bone)]'}`}>{l.name}</span>
+                      <span className={`mt-1 block text-[15px] transition-all duration-300 ${on ? 'max-h-10 text-[var(--mute)] opacity-100' : 'max-h-0 overflow-hidden opacity-0'}`}>{l.line}</span>
+                    </span>
+                  </button>
+                </li>
+              );
+            })}
+          </ol>
+        </Reveal>
+
+        <Reveal delay={120}>
+          <div id="layer-panel" role="tabpanel" className="sticky top-24 rounded-2xl border border-[var(--line)] bg-[var(--panel)] p-7 md:p-10">
+            <div key={layer.name} className="swap">
+              <div className="mono flex flex-wrap gap-2 text-[12px]">
+                {layer.tools.map((t) => (
+                  <span key={t} className="rounded-full border border-[var(--line)] px-3 py-1.5 text-[#cfccc3]">{t}</span>
+                ))}
               </div>
-            </Reveal>
-          ))}
-        </div>
+              <div className="mt-10 space-y-8">
+                {layer.proof.map((p, i) => (
+                  <div key={i}>
+                    <div className="mono text-[11px] uppercase tracking-widest text-[var(--mute)]">At {p.where}</div>
+                    <p className="serif mt-2 text-[clamp(1.25rem,2vw,1.7rem)] leading-snug text-[#a9a69f] [&_em]:not-italic [&_em]:text-[var(--volt)]">{p.text}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </Reveal>
       </div>
+
+      <Reveal>
+        <div className="mt-24 border-t border-[var(--line)] pt-10">
+          <Eyebrow>School and proof</Eyebrow>
+          <dl className="mt-6 grid gap-x-10 gap-y-5 sm:grid-cols-2 lg:grid-cols-3">
+            {SCHOOL.map(([a, b]) => (
+              <div key={a}>
+                <dt className="text-[15px] text-[#cfccc3]">{a}</dt>
+                <dd className="mono mt-0.5 text-[12px] text-[var(--mute)]">{b}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </Reveal>
     </section>
   );
 }
 
 function Contact() {
-  const cards = [
-    ['Call', PHONE, TEL],
-    ['Email', EMAIL, `mailto:${EMAIL}`],
-    ['LinkedIn', 'in/mayurjv', LINKEDIN],
-  ];
+  const [copied, setCopied] = useState(false);
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(EMAIL);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      window.location.href = `mailto:${EMAIL}`;
+    }
+  };
   return (
-    <section id="contact" className="mx-auto max-w-[1280px] px-6 pb-16 pt-28">
-      <div className="rounded-3xl bg-[var(--volt)] p-8 text-[var(--ink)] md:p-16">
-        <div className="mono text-[12px] uppercase tracking-[0.2em]">Hiring for Gen AI / agents / platform?</div>
-        <h2 className="display mt-6 text-[clamp(3rem,9vw,8rem)] font-extrabold">Let’s build<br />something real.</h2>
-        <div className="mt-12 grid gap-4 md:grid-cols-3">
-          {cards.map(([k, v, h]) => (
-            <a key={k} href={h} target={k === 'LinkedIn' ? '_blank' : undefined} rel="noreferrer" className="group rounded-2xl border-2 border-[var(--ink)] p-6 transition-colors hover:bg-[var(--ink)] hover:text-[var(--volt)]">
-              <div className="mono text-[11px] uppercase tracking-widest opacity-70">{k}</div>
-              <div className="mt-2 break-all text-xl font-semibold">{v} <span className="inline-block transition-transform group-hover:translate-x-1">→</span></div>
-            </a>
-          ))}
+    <section id="contact" className="border-t border-[var(--line)] px-6 pb-12 pt-28">
+      <div className="mx-auto max-w-[1280px]">
+        <Reveal>
+          <p className="serif max-w-2xl text-[clamp(1.5rem,2.6vw,2.2rem)] leading-snug text-[#8d8a83]">
+            Hiring for Gen AI, agent or data-platform work? <span className="text-[var(--bone)]">Call me.</span>
+          </p>
+          <a href={TEL} className="callme display mt-10 inline-block text-[clamp(2.6rem,9.5vw,9rem)] font-extrabold">{PHONE}</a>
+          <div className="hand mt-2 -rotate-1 text-2xl text-[var(--volt)]">↑ yes, that’s my real number</div>
+        </Reveal>
+
+        <Reveal delay={100}>
+          <div className="mt-20 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-[var(--line)] pt-10">
+            <span className="mono text-[12px] uppercase tracking-widest text-[var(--mute)]">Or email</span>
+            <a href={`mailto:${EMAIL}`} className="callme text-[clamp(1.4rem,3.2vw,2.6rem)] font-semibold tracking-tight">{EMAIL}</a>
+            <button type="button" onClick={copyEmail} className="mono rounded-full border border-[var(--line)] px-4 py-2 text-[12px] uppercase tracking-widest transition-colors hover:border-[var(--volt)] hover:text-[var(--volt)]" aria-live="polite">
+              {copied ? 'Copied ✓' : 'Copy'}
+            </button>
+          </div>
+
+          <div className="mt-10 grid gap-4 sm:grid-cols-2">
+            {[
+              { name: 'LinkedIn', handle: 'in/mayurjv', href: LINKEDIN, icon: <LinkedInIcon /> },
+              { name: 'GitHub', handle: 'MayurJadhav-1998', href: GITHUB, icon: <GitHubIcon /> },
+            ].map((s) => (
+              <a key={s.name} href={s.href} target="_blank" rel="noreferrer" className="group flex items-center gap-5 rounded-2xl border border-[var(--line)] p-6 transition-colors hover:border-[var(--volt)] hover:bg-[var(--panel)]">
+                <span className="text-[var(--bone)] transition-colors group-hover:text-[var(--volt)]">{s.icon}</span>
+                <span>
+                  <span className="block text-2xl font-semibold tracking-tight">{s.name}</span>
+                  <span className="mono mt-1 block text-[12px] text-[var(--mute)]">{s.handle}</span>
+                </span>
+                <span className="ml-auto text-2xl transition-transform group-hover:-translate-y-1 group-hover:translate-x-1" aria-hidden>↗</span>
+              </a>
+            ))}
+          </div>
+        </Reveal>
+
+        <div className="mono mt-16 flex flex-wrap items-center gap-x-8 gap-y-3 text-[12px] uppercase tracking-widest text-[var(--mute)]">
+          <a href={RESUME} target="_blank" rel="noreferrer" className="quiet">Résumé (PDF) ↗</a>
+          <span className="ml-auto normal-case tracking-normal">Designed and coded by me · {new Date().getFullYear()}</span>
         </div>
       </div>
-      <footer className="mono mt-10 flex flex-wrap justify-between gap-4 text-[12px] text-[var(--mute)]">
-        <span>© {new Date().getFullYear()} Mayur Jadhav</span>
-        <a href={GITHUB} target="_blank" rel="noreferrer" className="hover:text-[var(--volt)]">GitHub ↗</a>
-      </footer>
     </section>
   );
 }
@@ -346,11 +537,10 @@ export default function App() {
       <Nav />
       <main>
         <Hero />
-        <Marquee />
-        <Impact />
+        <Story />
         <Work />
         <Career />
-        <Stack />
+        <Toolbox />
         <Contact />
       </main>
     </div>
